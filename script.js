@@ -14,11 +14,6 @@ if (yearElement) {
   yearElement.textContent = String(new Date().getFullYear());
 }
 
-// Заглушки остаются доступными с клавиатуры, но не меняют адрес страницы.
-document.querySelectorAll("[data-placeholder-link]").forEach((link) => {
-  link.addEventListener("click", (event) => event.preventDefault());
-});
-
 // Заблокированная CTA-кнопка сохраняет hover/focus-анимацию, не запуская действие.
 document.querySelectorAll("[data-disabled-action]").forEach((button) => {
   button.addEventListener("click", (event) => event.preventDefault());

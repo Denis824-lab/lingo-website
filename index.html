@@ -12,8 +12,48 @@
     <title>Lingo — перевод без границ</title>
 
     <link rel="icon" href="icon.ico" sizes="any" />
+    <link rel="canonical" href="https://lingo.app" />
     <link rel="stylesheet" href="style.css?v=20260711.1" />
     <script src="script.js?v=20260711.1" defer></script>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Lingo — перевод без границ" />
+    <meta property="og:description" content="Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой." />
+    <meta property="og:image" content="https://lingo.app/og-image.jpg" />
+    <meta property="og:url" content="https://lingo.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Lingo" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lingo — перевод без границ" />
+    <meta name="twitter:description" content="Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой." />
+    <meta name="twitter:image" content="https://lingo.app/og-image.jpg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Lingo",
+      "description": "Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows",
+      "url": "https://lingo.app",
+      "screenshot": "https://lingo.app/app_screenshot.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "RUB",
+        "description": "3 месяца бесплатного триала"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Denis"
+      }
+    }
+    </script>
   </head>
 
   <body>
@@ -219,10 +259,70 @@
         </div>
         <p>© <span data-current-year>2026</span> Lingo. Сделано с вниманием к словам.</p>
         <nav aria-label="Дополнительная навигация">
-          <a href="#" data-placeholder-link>Конфиденциальность</a>
-          <a href="mailto:hello@lingo.app">Связаться</a>
+          <a href="privacy.html">Конфиденциальность</a>
+          <a href="terms.html">Условия</a>
+          <a href="contact.html">Связаться</a>
         </nav>
       </div>
     </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" role="dialog" aria-label="Согласие на использование cookie" data-cookie-consent hidden>
+      <div class="cookie-consent__inner container">
+        <p class="cookie-consent__text">
+          Мы используем файлы cookie и аналитику для улучшения работы сайта.
+          Подробнее в <a href="privacy.html">Политике конфиденциальности</a>.
+        </p>
+        <div class="cookie-consent__actions">
+          <button class="cookie-consent__btn cookie-consent__btn--accept" type="button" data-cookie-accept>
+            Принять
+          </button>
+          <button class="cookie-consent__btn cookie-consent__btn--decline" type="button" data-cookie-decline>
+            Отклонить
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
+        var consent = localStorage.getItem("cookie-consent");
+        if (consent === null) {
+          document.querySelector("[data-cookie-consent]").hidden = false;
+        } else if (consent === "accepted") {
+          loadAnalytics();
+        }
+
+        document.querySelector("[data-cookie-accept]")?.addEventListener("click", function() {
+          localStorage.setItem("cookie-consent", "accepted");
+          document.querySelector("[data-cookie-consent]").hidden = true;
+          loadAnalytics();
+        });
+
+        document.querySelector("[data-cookie-decline]")?.addEventListener("click", function() {
+          localStorage.setItem("cookie-consent", "declined");
+          document.querySelector("[data-cookie-consent]").hidden = true;
+        });
+
+        function loadAnalytics() {
+          // Яндекс.Метрика
+          var ymScript = document.createElement("script");
+          ymScript.async = true;
+          ymScript.src = "https://mc.yandex.ru/metrika/tag.js";
+          document.head.appendChild(ymScript);
+
+          window.ym = window.ym || function() {
+            (window.ym.a = window.ym.a || []).push(arguments);
+          };
+          window.ym.l = 1 * new Date();
+          ym("110608749", "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
