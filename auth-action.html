@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Обработка email-действий Lingo." />
+    <meta name="theme-color" content="#111014" />
+    <title>Обработка — Lingo</title>
+
+    <link rel="icon" href="/icon.ico" sizes="any" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css?v=20260715.1" />
+    <script type="module" src="/auth-action.js"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__orb ambient__orb--violet"></span>
+      <span class="ambient__orb ambient__orb--orange"></span>
+      <span class="ambient__orb ambient__orb--gold"></span>
+    </div>
+
+    <header class="site-header site-header--sub">
+      <div class="site-header__inner container glass-panel">
+        <a class="brand" href="/" aria-label="Lingo — на главную">
+          <span class="brand__mark" aria-hidden="true">
+            <img src="/icon.ico" alt="" width="256" height="256" />
+          </span>
+          <span class="brand__name">Lingo</span>
+          <span class="brand__badge">Beta</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <div class="auth-page">
+        <div class="auth-card glass-panel">
+          <!-- Loading state -->
+          <div class="auth-action-state" data-action-loading>
+            <div class="auth-spinner" aria-hidden="true"></div>
+            <p>Обработка…</p>
+          </div>
+
+          <!-- Email verification success -->
+          <div class="auth-action-state" data-action-verify-success hidden>
+            <div class="auth-action-state__icon auth-action-state__icon--success" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h2 class="auth-action-state__title">Email подтверждён</h2>
+            <p class="auth-action-state__text">Ваш аккаунт активирован. Теперь вы можете войти.</p>
+            <a class="auth-submit" href="/login">Войти</a>
+          </div>
+
+          <!-- Password reset form -->
+          <div class="auth-action-state" data-action-reset hidden>
+            <h2 class="auth-action-state__title">Новый пароль</h2>
+            <p class="auth-action-state__text">Введите новый пароль для вашего аккаунта.</p>
+            <form class="auth-form" novalidate data-reset-password-form>
+              <div class="auth-field">
+                <label class="auth-field__label" for="new-password">Новый пароль</label>
+                <div class="auth-input-wrap">
+                  <input
+                    class="auth-input"
+                    type="password"
+                    id="new-password"
+                    name="password"
+                    autocomplete="new-password"
+                    placeholder="Минимум 6 символов"
+                    minlength="6"
+                    required
+                  />
+                  <button class="auth-input-toggle" type="button" aria-label="Показать пароль" data-password-toggle>
+                    <svg class="auth-input-toggle__eye" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                    <svg class="auth-input-toggle__eye-off is-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <line x1="2" y1="2" x2="22" y2="22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <p class="auth-form__error" data-reset-error aria-live="polite"></p>
+
+              <button class="auth-submit" type="submit" data-reset-submit>
+                <span data-reset-submit-label>Сохранить пароль</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Password reset success -->
+          <div class="auth-action-state" data-action-reset-success hidden>
+            <div class="auth-action-state__icon auth-action-state__icon--success" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h2 class="auth-action-state__title">Пароль изменён</h2>
+            <p class="auth-action-state__text">Теперь вы можете войти с новым паролем.</p>
+            <a class="auth-submit" href="/login">Войти</a>
+          </div>
+
+          <!-- Error state -->
+          <div class="auth-action-state" data-action-error hidden>
+            <div class="auth-action-state__icon auth-action-state__icon--error" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h2 class="auth-action-state__title">Ссылка недействительна</h2>
+            <p class="auth-action-state__text" data-action-error-text>
+              Возможно, ссылка устарела или уже была использована. Запросите новую ссылку.
+            </p>
+            <a class="auth-submit" href="/login">Перейти ко входу</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer site-footer--sub">
+      <div class="site-footer__inner container">
+        <p>&copy; <span data-current-year>2026</span> Lingo.</p>
+        <nav aria-label="Дополнительная навигация">
+          <a href="/privacy">Конфиденциальность</a>
+          <a href="/terms">Условия</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

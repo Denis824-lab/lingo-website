@@ -2,327 +2,169 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Lingo — быстрый и лёгкий переводчик для Windows, который всегда под рукой."
-    />
-    <meta name="theme-color" content="#111014" />
-    <meta name="lingo-subscribe-endpoint" content="/.netlify/functions/subscribe" />
-    <title>Lingo — перевод без границ</title>
-
-    <link rel="icon" href="icon.ico" sizes="any" />
-    <link rel="canonical" href="https://lingo.app" />
-    <link rel="stylesheet" href="style.css?v=20260711.1" />
-    <script src="script.js?v=20260711.1" defer></script>
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Lingo — перевод без границ" />
-    <meta property="og:description" content="Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой." />
-    <meta property="og:image" content="https://lingo.app/og-image.jpg" />
-    <meta property="og:url" content="https://lingo.app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09080d" />
+    <meta name="description" content="Lingo — переводчик для Windows с переводом экрана, буфера обмена, документов и живыми субтитрами." />
+    <link rel="canonical" href="https://lingo-app.ru/" />
+    <meta property="og:title" content="Lingo — переводит не слова, а смысл" />
+    <meta property="og:description" content="Перевод экрана, буфера обмена, документов и живые субтитры в одном приложении для Windows." />
+    <meta property="og:image" content="https://lingo-app.ru/og-image.jpg" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ru_RU" />
-    <meta property="og:site_name" content="Lingo" />
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Lingo — перевод без границ" />
-    <meta name="twitter:description" content="Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой." />
-    <meta name="twitter:image" content="https://lingo.app/og-image.jpg" />
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Lingo",
-      "description": "Быстрый и лёгкий переводчик для Windows, который понимает контекст и остаётся под рукой.",
-      "applicationCategory": "UtilitiesApplication",
-      "operatingSystem": "Windows",
-      "url": "https://lingo.app",
-      "screenshot": "https://lingo.app/app_screenshot.png",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "RUB",
-        "description": "3 месяца бесплатного триала"
-      },
-      "author": {
-        "@type": "Person",
-        "name": "Denis"
-      }
-    }
+    <title>Lingo — переводит не слова, а смысл</title>
+    <link rel="icon" href="icon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css?v=20260715.2" />
+    <script type="importmap">
+      {"imports":{"three":"https://unpkg.com/three@0.170.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.170.0/examples/jsm/"}}
     </script>
+    <script type="module" src="three-scene.js?v=20260715.1"></script>
+    <script src="script.js?v=20260715.2" defer></script>
   </head>
-
   <body>
-    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <a class="skip-link" href="#content">К содержимому</a>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="cursor-light" aria-hidden="true"></div>
 
-    <div class="ambient" aria-hidden="true">
-      <span class="ambient__orb ambient__orb--violet"></span>
-      <span class="ambient__orb ambient__orb--orange"></span>
-      <span class="ambient__orb ambient__orb--gold"></span>
-    </div>
-
-    <header class="site-header" data-reveal>
-      <div class="site-header__inner container glass-panel">
-        <a class="brand" href="#main-content" aria-label="Lingo — на главную">
-          <span class="brand__mark" aria-hidden="true">
-            <img src="logo.png" alt="" width="512" height="512" />
-          </span>
-          <span class="brand__name">Lingo</span>
-          <span class="brand__badge">Beta</span>
+    <header class="nav-wrap">
+      <nav class="nav shell" aria-label="Основная навигация">
+        <a class="brand" href="#content" aria-label="Lingo, на главную">
+          <span class="brand-mark"><img src="icon.ico" alt="" /></span>
+          <span>Lingo</span>
         </a>
-
-        <a
-          class="github-link"
-          href="https://github.com/Denis824-lab"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Профиль разработчика Lingo на GitHub"
-          aria-describedby="github-tooltip"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.24c-3.23.7-3.91-1.37-3.91-1.37-.53-1.34-1.29-1.69-1.29-1.69-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.58-.29-5.29-1.29-5.29-5.69 0-1.26.45-2.28 1.2-3.09-.12-.29-.52-1.48.11-3.05 0 0 .98-.31 3.16 1.18A10.94 10.94 0 0 1 12 6.11c.98 0 1.93.13 2.84.38 2.19-1.49 3.17-1.18 3.17-1.18.63 1.57.23 2.76.11 3.05.75.81 1.2 1.83 1.2 3.09 0 4.42-2.72 5.39-5.3 5.68.42.36.79 1.07.79 2.16v3.26c0 .31.21.68.8.56A11.5 11.5 0 0 0 12 .7Z"
-            />
-          </svg>
-          <span class="github-link__tooltip" id="github-tooltip" role="tooltip">
-            GitHub разработчика Lingo
-          </span>
-        </a>
-      </div>
+        <div class="nav-links">
+          <a href="#experience">Возможности</a>
+          <a href="#how">Как работает</a>
+          <a href="#access">Скачать</a>
+        </div>
+        <div class="nav-actions">
+          <div data-auth-controls></div>
+          <a class="pill pill-small" href="/download">Скачать для Windows <span>↗</span></a>
+        </div>
+        <button class="menu-button" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+      </nav>
     </header>
 
-    <main id="main-content">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero__background" aria-hidden="true"></div>
-
-        <div class="hero__content container">
-          <div class="hero__copy">
-            <p class="eyebrow" data-reveal style="--reveal-delay: 90ms">
-              <span class="eyebrow__dot"></span>
-              Скоро на Windows
-            </p>
-
-            <h1 id="hero-title" data-reveal style="--reveal-delay: 160ms">
-              Переводи мысли.<br />
-              <span class="gradient-text">Сохраняй смысл.</span>
-            </h1>
-
-            <p class="hero__description" data-reveal style="--reveal-delay: 240ms">
-              Lingo — быстрый и лёгкий переводчик, который понимает контекст и
-              остаётся под рукой, когда каждое слово имеет значение.
-            </p>
-
-            <div class="hero__actions" data-reveal style="--reveal-delay: 320ms">
-              <button class="download-button" type="button" aria-disabled="true" data-disabled-action>
-                <span class="download-button__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 3v12m0 0 5-5m-5 5-5-5M5 20h14" />
-                  </svg>
-                </span>
-                <span class="download-button__label">
-                  <small>Скачать</small>
-                  Beta для Windows
-                </span>
-                <span class="download-button__status">Скоро</span>
-              </button>
-
-            </div>
+    <main id="content">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <div class="status reveal"><span></span> Open beta · Windows</div>
+          <h1 class="reveal">Не просто слова.<br /><em>Их настоящий смысл.</em></h1>
+          <p class="hero-lead reveal">Lingo переводит текст, экран и документы, распознаёт речь и показывает живые субтитры — в одном приложении для Windows.</p>
+          <div class="hero-actions reveal">
+            <a class="pill pill-primary magnetic" href="/download"><span class="pill-glow"></span>Скачать бесплатно <b>↗</b></a>
+            <button class="watch-link" type="button" data-scroll-demo><i>▶</i><span>Смотреть, как работает<small>40 секунд</small></span></button>
           </div>
-
-          <div class="product-stage" data-reveal style="--reveal-delay: 400ms">
-            <div class="product-stage__glow" aria-hidden="true"></div>
-            <div class="app-window glass-panel">
-              <div class="app-window__bar">
-                <div class="app-window__identity">
-                  <img src="icon.png" alt="" width="244" height="244" />
-                  <span>Lingo</span>
-                </div>
-                <div class="window-controls" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-
-              <div class="app-window__canvas">
-                <img
-                  class="app-window__screenshot"
-                  src="app_screenshot.png"
-                  alt="Интерфейс приложения Lingo: экран перевода текста"
-                  width="1920"
-                  height="1080"
-                  decoding="async"
-                />
-              </div>
-            </div>
-
+          <div class="trust-row reveal">
+            <div class="avatars"><span>А</span><span>文</span><span>A</span><span>あ</span></div>
+            <p><strong>Без границ</strong><br />между вами и миром</p>
           </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Интерактивная 3D-модель Lingo">
+          <div class="visual-halo"></div>
+          <canvas id="lingo-orb"></canvas>
+          <div class="orbit-copy orbit-copy-a"><span>CONTEXT</span></div>
+          <div class="orbit-copy orbit-copy-b"><span>MEANING</span></div>
+          <div class="translation-card card-one">
+            <span class="language">EN</span>
+            <p>It just feels right.</p>
+            <i>Original</i>
+          </div>
+          <div class="translation-card card-two">
+            <span class="language">RU</span>
+            <p>Просто то, что нужно.</p>
+            <i><b></b> Контекст сохранён</i>
+          </div>
+          <div class="drag-hint"><span>↔</span> вращайте</div>
+        </div>
+        <div class="scroll-note"><span></span>Исследуйте Lingo</div>
+      </section>
+
+      <section class="language-ribbon" aria-label="Поддерживаемые языки">
+        <div class="ribbon-track">
+          <span>Hello</span><i>✦</i><span>Bonjour</span><i>✦</i><span>Привет</span><i>✦</i><span>こんにちは</span><i>✦</i><span>Hola</span><i>✦</i><span>Ciao</span><i>✦</i>
+          <span>Hello</span><i>✦</i><span>Bonjour</span><i>✦</i><span>Привет</span><i>✦</i><span>こんにちは</span><i>✦</i><span>Hola</span><i>✦</i><span>Ciao</span><i>✦</i>
         </div>
       </section>
 
-      <section class="benefits" aria-label="Преимущества Lingo">
-        <div class="benefits__grid container" data-reveal>
-          <article class="benefit-card glass-panel">
-            <span class="benefit-card__icon" aria-hidden="true">文</span>
-            <div>
-              <h2>Контекстный</h2>
-              <p>Сохраняет смысл фразы, а не просто заменяет отдельные слова.</p>
+      <section class="manifesto shell section" id="experience">
+        <p class="section-label reveal"><span>01</span> Другая глубина перевода</p>
+        <div class="manifesto-grid">
+          <h2 class="reveal">Переводчик должен<br />понимать <em>вас.</em></h2>
+          <p class="reveal">Не выдавать механическую замену слов, а считывать намерение. Lingo удерживает мысль целиком — от деловой точности до живой разговорной речи.</p>
+        </div>
+        <div class="bento">
+          <article class="bento-card bento-main reveal" data-tilt>
+            <div class="card-index">01 / CONTEXT</div>
+            <div class="context-demo">
+              <div class="context-line"><span>Исходный текст</span><b>“Break a leg!”</b></div>
+              <div class="pulse-line"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="context-result"><span>Lingo понимает идиому</span><b>«Ни пуха ни пера!»</b></div>
             </div>
+            <div><h3>Контекст вместо кальки</h3><p>Смысл фразы остаётся живым — даже когда дословный перевод бессилен.</p></div>
           </article>
-
-          <article class="benefit-card glass-panel">
-            <span class="benefit-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m13 2-8 12h7l-1 8 8-12h-7l1-8Z" /></svg>
-            </span>
-            <div>
-              <h2>Моментальный перевод</h2>
-              <p>Быстрый результат без лишних экранов, ожидания и сложных настроек.</p>
-            </div>
+          <article class="bento-card bento-speed reveal" data-tilt>
+            <div class="card-index">02 / SPEED</div>
+            <div class="speed-number"><strong data-count="0">5</strong><span>режимов</span></div>
+            <div><h3>Термины на месте</h3><p>IT, медицина, право, инженерия и бизнес.</p></div>
           </article>
-
-          <article class="benefit-card glass-panel">
-            <span class="benefit-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3v18M5 8.5 12 3l7 5.5M5 15.5 12 21l7-5.5" /></svg>
-            </span>
-            <div>
-              <h2>Всегда под рукой</h2>
-              <p>Лёгкий интерфейс Windows, доступный в нужный момент.</p>
+          <article class="bento-card bento-tone reveal" data-tilt>
+            <div class="card-index">03 / WORKFLOW</div>
+            <div class="tone-switch" role="group" aria-label="Способ перевода">
+              <button class="active" type="button" data-tone="Экран">Экран</button><button type="button" data-tone="Буфер">Буфер</button><button type="button" data-tone="Речь">Речь</button>
             </div>
+            <blockquote data-tone-copy>Alt+Z — выделите область на экране</blockquote>
+            <div><h3>Ваш рабочий ритм</h3><p>Горячие клавиши настраиваются в приложении.</p></div>
           </article>
         </div>
       </section>
 
-      <section class="early-access" aria-labelledby="early-access-title">
-        <div class="early-access__card container glass-panel" data-reveal>
-          <div class="early-access__glow" aria-hidden="true"></div>
-
-          <div class="early-access__content" data-form-content>
-            <p class="early-access__eyebrow">Ранний доступ</p>
-            <h2 id="early-access-title">Станьте первыми, кто попробует Lingo</h2>
-            <p class="early-access__description">
-              Оставьте email — сообщим, как только Beta станет доступна для скачивания.
-            </p>
-
-            <form class="access-form" novalidate data-access-form>
-              <label class="access-form__honeypot" aria-hidden="true">
-                <span>Не заполняйте это поле</span>
-                <input type="text" name="website" tabindex="-1" autocomplete="off" />
-              </label>
-              <div class="access-form__row">
-                <label class="email-control">
-                  <span class="sr-only">Email</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4 6.5h16v11H4v-11Zm0 1L12 13l8-5.5" />
-                  </svg>
-                  <input
-                    type="email"
-                    name="email"
-                    autocomplete="email"
-                    inputmode="email"
-                    placeholder="you@example.com"
-                    aria-describedby="email-error trial-description"
-                    required
-                  />
-                </label>
-                <button class="notify-button" type="submit" data-submit-button>
-                  <span data-submit-label>Узнать о запуске</span>
-                </button>
+      <section class="product-section section" id="how">
+        <div class="shell">
+          <p class="section-label reveal"><span>02</span> Продукт в действии</p>
+          <div class="product-heading reveal"><h2>Выделили. Нажали.<br /><em>Поняли.</em></h2><p>Одна комбинация клавиш — и точный перевод уже рядом. Без переключения вкладок и потери фокуса.</p></div>
+          <div class="product-stage reveal" data-product-stage>
+            <div class="stage-glow"></div>
+            <div class="fake-window">
+              <div class="fake-titlebar"><div><i></i><i></i><i></i></div><span>Lingo / Translate</span><b>ALT + Q</b></div>
+              <div class="fake-body">
+                <div class="source-pane"><small>ENGLISH · AUTO</small><p>Design is not just what it looks like. Design is how it <mark>works.</mark></p><span>37 symbols</span></div>
+                <button class="swap-button" type="button" aria-label="Поменять языки">⇄</button>
+                <div class="result-pane"><small>РУССКИЙ · ЕСТЕСТВЕННЫЙ</small><p>Дизайн — это не только то, как что-то выглядит. Это то, как оно <mark>работает.</mark></p><div><span>Контекст</span><span>Естественно</span><button type="button">⧉</button></div></div>
               </div>
-              <p class="access-form__error" id="email-error" aria-live="polite"></p>
-              <p class="access-form__trial" id="trial-description">
-                3 месяца бесплатного триала для всех пользователей
-              </p>
-            </form>
+            </div>
+            <div class="shortcut-chip"><kbd>Alt</kbd><b>+</b><kbd>Q</kbd><span>Перевод буфера</span></div>
           </div>
+        </div>
+      </section>
 
-          <div class="early-access__success" role="status" aria-live="polite" data-form-success hidden>
-            <span class="early-access__success-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7" /></svg>
-            </span>
-            <p>
-              Спасибо! Заявка отправлена. Мы сообщим вам в день запуска. Все пользователи
-              получат 3 месяца бесплатного триала при регистрации в приложении.
-            </p>
+      <section class="access section shell" id="access">
+        <div class="access-card reveal">
+          <div class="access-orb"></div>
+          <p class="section-label"><span>03</span> Открытая beta</p>
+          <h2>Мир говорит.<br /><em>Вы понимаете.</em></h2>
+          <p>Скачайте Lingo, создайте единый аккаунт и подтвердите email. В течение открытой beta все функции доступны бесплатно.</p>
+          <div class="access-form">
+            <a class="pill pill-primary" href="/download">Скачать для Windows <b>↗</b></a>
+            <a class="access-login-link" href="/login?mode=register">Уже скачали? Создать аккаунт</a>
           </div>
+          <small class="form-note">Windows 10/11 · установка без оплаты · email нужен только для входа в Lingo.</small>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__inner container">
-        <div class="footer-brand">
-          <img src="logo.png" alt="" width="512" height="512" />
-          <span>Lingo</span>
-        </div>
-        <p>© <span data-current-year>2026</span> Lingo. Сделано с вниманием к словам.</p>
-        <nav aria-label="Дополнительная навигация">
-          <a href="privacy.html">Конфиденциальность</a>
-          <a href="terms.html">Условия</a>
-          <a href="contact.html">Связаться</a>
-        </nav>
-      </div>
+    <footer class="footer shell">
+      <a class="brand" href="#content"><span class="brand-mark"><img src="icon.ico" alt="" /></span><span>Lingo</span></a>
+      <p>Переводим не слова. Переводим смысл.</p>
+      <div><a href="privacy.html">Конфиденциальность</a><a href="terms.html">Условия</a><a href="contact.html">Контакты</a></div>
+      <span>© 2026</span>
     </footer>
-
-    <!-- Cookie Consent Banner -->
-    <div class="cookie-consent" role="dialog" aria-label="Согласие на использование cookie" data-cookie-consent hidden>
-      <div class="cookie-consent__inner container">
-        <p class="cookie-consent__text">
-          Мы используем файлы cookie и аналитику для улучшения работы сайта.
-          Подробнее в <a href="privacy.html">Политике конфиденциальности</a>.
-        </p>
-        <div class="cookie-consent__actions">
-          <button class="cookie-consent__btn cookie-consent__btn--accept" type="button" data-cookie-accept>
-            Принять
-          </button>
-          <button class="cookie-consent__btn cookie-consent__btn--decline" type="button" data-cookie-decline>
-            Отклонить
-          </button>
-        </div>
-      </div>
+    <div class="cookie-bar" role="dialog" aria-label="Использование cookie" data-cookie-consent hidden>
+      <p>Используем cookie для улучшения Lingo. <a href="privacy.html">Подробнее</a></p>
+      <div><button type="button" data-cookie-decline>Отклонить</button><button type="button" data-cookie-accept>Принять</button></div>
     </div>
-
-    <script>
-      (function() {
-        var consent = localStorage.getItem("cookie-consent");
-        if (consent === null) {
-          document.querySelector("[data-cookie-consent]").hidden = false;
-        } else if (consent === "accepted") {
-          loadAnalytics();
-        }
-
-        document.querySelector("[data-cookie-accept]")?.addEventListener("click", function() {
-          localStorage.setItem("cookie-consent", "accepted");
-          document.querySelector("[data-cookie-consent]").hidden = true;
-          loadAnalytics();
-        });
-
-        document.querySelector("[data-cookie-decline]")?.addEventListener("click", function() {
-          localStorage.setItem("cookie-consent", "declined");
-          document.querySelector("[data-cookie-consent]").hidden = true;
-        });
-
-        function loadAnalytics() {
-          // Яндекс.Метрика
-          var ymScript = document.createElement("script");
-          ymScript.async = true;
-          ymScript.src = "https://mc.yandex.ru/metrika/tag.js";
-          document.head.appendChild(ymScript);
-
-          window.ym = window.ym || function() {
-            (window.ym.a = window.ym.a || []).push(arguments);
-          };
-          window.ym.l = 1 * new Date();
-          ym("110608749", "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
-          });
-        }
-      })();
-    </script>
+    <script type="module" src="auth-state.js"></script>
   </body>
 </html>

@@ -12,7 +12,9 @@
 
     <link rel="icon" href="icon.ico" sizes="any" />
     <link rel="canonical" href="https://lingo-app-2026.netlify.app/terms" />
-    <link rel="stylesheet" href="style.css?v=20260711.1" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css?v=20260715.1" />
+    <script type="module" src="auth-state.js"></script>
   </head>
 
   <body>
@@ -24,15 +26,16 @@
       <span class="ambient__orb ambient__orb--gold"></span>
     </div>
 
-    <header class="site-header">
+    <header class="site-header site-header--sub">
       <div class="site-header__inner container glass-panel">
         <a class="brand" href="index.html" aria-label="Lingo — на главную">
           <span class="brand__mark" aria-hidden="true">
-            <img src="logo.png" alt="" width="512" height="512" />
+            <img src="icon.ico" alt="" width="256" height="256" />
           </span>
           <span class="brand__name">Lingo</span>
           <span class="brand__badge">Beta</span>
         </a>
+        <div data-auth-controls></div>
       </div>
     </header>
 
@@ -72,14 +75,15 @@
             <li>Собирать персональные данные других пользователей без их согласия.</li>
           </ul>
 
-          <h2>4. Форма подписки на ранний доступ</h2>
+          <h2>4. Аккаунт и открытая beta</h2>
           <p>
-            Сайт предоставляет возможность подписаться на уведомление о запуске бета-версии приложения Lingo.
-            Оставляя свой email, вы соглашаетесь с <a href="privacy.html">Политикой конфиденциальности</a>
-            и даёте согласие на получение информационных сообщений о запуске и обновлениях приложения.
+            Сайт предоставляет возможность создать единый аккаунт для сайта и приложения Lingo, а также скачать
+            открытую beta-версию. Для доступа к функциям beta необходимо подтвердить email по ссылке из письма.
+            Во время открытой beta функции приложения доступны бесплатно; будущий коммерческий релиз может иметь
+            отдельные условия, которые будут опубликованы до их вступления в силу.
           </p>
           <p>
-            Вы можете отписаться от рассылки в любой момент, связавшись с нами по адресу
+            Вы можете запросить удаление аккаунта или персональных данных, связавшись с нами по адресу
             <a href="mailto:kugubaev.dev@gmail.com">kugubaev.dev@gmail.com</a>.
           </p>
 
@@ -138,7 +142,7 @@
     <footer class="site-footer">
       <div class="site-footer__inner container">
         <div class="footer-brand">
-          <img src="logo.png" alt="" width="512" height="512" />
+          <img src="icon.ico" alt="" width="256" height="256" />
           <span>Lingo</span>
         </div>
         <p>© <span data-current-year>2026</span> Lingo. Сделано с вниманием к словам.</p>

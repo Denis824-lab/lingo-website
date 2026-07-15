@@ -1,144 +1,144 @@
 "use strict";
 
-/**
- * Запускает появление интерфейса только после готовности DOM.
- * Класс добавляется в отдельном кадре, чтобы браузер успел применить начальные стили.
- */
-window.requestAnimationFrame(() => {
-  document.body.classList.add("is-ready");
-});
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const pointerGlow = document.querySelector(".cursor-light");
+const menuButton = document.querySelector(".menu-button");
+const navigation = document.querySelector(".nav");
 
-// Поддерживает актуальный год без ручного обновления разметки.
-const yearElement = document.querySelector("[data-current-year]");
-if (yearElement) {
-  yearElement.textContent = String(new Date().getFullYear());
+menuButton?.addEventListener("click", () => {
+  const open = navigation?.classList.toggle("is-open") || false;
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+});
+document.querySelectorAll(".nav-links a").forEach((link) => link.addEventListener("click", () => {
+  navigation?.classList.remove("is-open");
+  menuButton?.setAttribute("aria-expanded", "false");
+}));
+
+if (!reducedMotion && pointerGlow) {
+  window.addEventListener("pointermove", (event) => {
+    pointerGlow.style.left = `${event.clientX}px`;
+    pointerGlow.style.top = `${event.clientY}px`;
+  }, { passive: true });
 }
 
-// Заблокированная CTA-кнопка сохраняет hover/focus-анимацию, не запуская действие.
-document.querySelectorAll("[data-disabled-action]").forEach((button) => {
-  button.addEventListener("click", (event) => event.preventDefault());
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("is-visible");
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.14, rootMargin: "0px 0px -40px" });
+
+document.querySelectorAll(".reveal").forEach((element, index) => {
+  element.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+  revealObserver.observe(element);
 });
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+document.querySelector("[data-scroll-demo]")?.addEventListener("click", () => {
+  document.querySelector("#how")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+});
+
+document.querySelectorAll("[data-tone]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const copies = {
+      "Экран": "Alt+Z — выделите область на экране",
+      "Буфер": "Alt+Q — переведите текст из буфера",
+      "Речь": "Alt+X — начните голосовой ввод",
+    };
+    document.querySelectorAll("[data-tone]").forEach((item) => item.classList.toggle("active", item === button));
+    const copy = document.querySelector("[data-tone-copy]");
+    if (copy) {
+      copy.animate([{ opacity: 0, transform: "translateY(5px)" }, { opacity: 1, transform: "none" }], { duration: 280 });
+      copy.textContent = copies[button.dataset.tone];
+    }
+  });
+});
+
+if (!reducedMotion) {
+  document.querySelectorAll("[data-tilt]").forEach((card) => {
+    card.addEventListener("pointermove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+      const y = (event.clientY - rect.top) / rect.height;
+      card.style.setProperty("--x", `${x * 100}%`);
+      card.style.setProperty("--y", `${y * 100}%`);
+      card.style.transform = `perspective(800px) rotateX(${(0.5 - y) * 3}deg) rotateY(${(x - 0.5) * 3}deg)`;
+    });
+    card.addEventListener("pointerleave", () => { card.style.transform = ""; });
+  });
+}
+
 const accessForm = document.querySelector("[data-access-form]");
-
-/**
- * Валидирует email средствами браузера и мягко переключает карточку
- * из состояния формы в подтверждение раннего доступа.
- */
-if (accessForm) {
-  const emailInput = accessForm.querySelector('input[type="email"]');
-  const websiteInput = accessForm.querySelector('input[name="website"]');
-  const errorElement = accessForm.querySelector(".access-form__error");
-  const formContent = document.querySelector("[data-form-content]");
-  const successMessage = document.querySelector("[data-form-success]");
-  const submitButton = accessForm.querySelector("[data-submit-button]");
-  const submitLabel = accessForm.querySelector("[data-submit-label]");
+accessForm?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const email = accessForm.querySelector('input[name="email"]');
+  const website = accessForm.querySelector('input[name="website"]');
+  const button = accessForm.querySelector("[data-submit-button]");
+  const label = accessForm.querySelector("[data-submit-label]");
+  const note = document.querySelector("[data-form-note]");
   const endpoint = document.querySelector('meta[name="lingo-subscribe-endpoint"]')?.content;
-  let isSubmitting = false;
 
-  const clearError = () => {
-    if (errorElement) errorElement.textContent = "";
-    emailInput?.removeAttribute("aria-invalid");
-  };
+  if (!email?.validity.valid) {
+    if (note) note.textContent = "Введите корректный email, чтобы продолжить.";
+    email?.focus();
+    return;
+  }
+  if (!endpoint) {
+    if (note) note.textContent = "Сервис подписки временно недоступен.";
+    return;
+  }
 
-  const setSubmitting = (value) => {
-    isSubmitting = value;
-    if (submitButton) submitButton.disabled = value;
-    accessForm.setAttribute("aria-busy", String(value));
-    if (submitLabel) submitLabel.textContent = value ? "Сохраняем…" : "Узнать о запуске";
-  };
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 10000);
+  button.disabled = true;
+  accessForm.setAttribute("aria-busy", "true");
+  if (label) label.textContent = "Сохраняем…";
 
-  const showError = (message) => {
-    if (errorElement) errorElement.textContent = message;
-    emailInput?.setAttribute("aria-invalid", "true");
-  };
-
-  emailInput?.addEventListener("input", clearError);
-
-  accessForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (isSubmitting) return;
-
-    if (!emailInput || !emailInput.validity.valid) {
-      showError("Введите корректный email, чтобы продолжить.");
-      emailInput?.focus();
-      return;
-    }
-
-    clearError();
-    if (!endpoint) {
-      showError("Сервис подписки пока недоступен. Попробуйте позже.");
-      return;
-    }
-
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 10_000);
-    setSubmitting(true);
-
-    fetch(endpoint, {
+  try {
+    const response = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: emailInput.value, website: websiteInput?.value ?? "" }),
+      body: JSON.stringify({ email: email.value, website: website?.value || "" }),
       signal: controller.signal,
-    })
-      .then(async (response) => {
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.ok) {
-          throw new Error(data.error || "Не удалось отправить заявку. Попробуйте ещё раз.");
-        }
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.ok) throw new Error(result.error || "Не удалось отправить заявку.");
+    email.disabled = true;
+    if (label) label.textContent = "Вы в списке ✓";
+    if (note) note.textContent = "Готово. Приглашение придёт на указанную почту.";
+  } catch (error) {
+    button.disabled = false;
+    if (label) label.textContent = "Получить приглашение";
+    if (note) note.textContent = error.name === "AbortError" ? "Сервер отвечает слишком долго. Попробуйте снова." : error.message;
+  } finally {
+    window.clearTimeout(timeout);
+    accessForm.setAttribute("aria-busy", "false");
+  }
+});
 
-        formContent?.classList.add("is-leaving");
-        const transitionDelay = reduceMotion.matches ? 0 : 280;
-        window.setTimeout(() => {
-          if (formContent) formContent.hidden = true;
-          if (successMessage) {
-            successMessage.hidden = false;
-            successMessage.classList.add("is-visible");
-          }
-        }, transitionDelay);
-      })
-      .catch((error) => {
-        const message = error.name === "AbortError"
-          ? "Сервер отвечает слишком долго. Попробуйте ещё раз."
-          : error.message;
-        showError(message);
-      })
-      .finally(() => {
-        window.clearTimeout(timeout);
-        setSubmitting(false);
-      });
-  });
-}
+const cookieBar = document.querySelector("[data-cookie-consent]");
+const consent = localStorage.getItem("cookie-consent");
+if (cookieBar && consent === null) cookieBar.hidden = false;
+if (consent === "accepted") loadAnalytics();
+document.querySelector("[data-cookie-accept]")?.addEventListener("click", () => {
+  localStorage.setItem("cookie-consent", "accepted");
+  if (cookieBar) cookieBar.hidden = true;
+  loadAnalytics();
+});
+document.querySelector("[data-cookie-decline]")?.addEventListener("click", () => {
+  localStorage.setItem("cookie-consent", "declined");
+  if (cookieBar) cookieBar.hidden = true;
+});
 
-const finePointer = window.matchMedia("(pointer: fine)");
-const productStage = document.querySelector(".product-stage");
-
-/**
- * Добавляет лёгкую параллакс-реакцию мокапа на курсор.
- * Эффект включён только для точного указателя и отключён при reduced motion.
- */
-if (productStage && finePointer.matches && !reduceMotion.matches) {
-  const appWindow = productStage.querySelector(".app-window");
-  const glow = productStage.querySelector(".product-stage__glow");
-
-  productStage.addEventListener("pointermove", (event) => {
-    const bounds = productStage.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
-
-    if (appWindow) {
-      appWindow.style.transform = `rotateY(${x * 5}deg) rotateX(${-y * 4}deg) translateY(-3px)`;
-    }
-
-    if (glow) {
-      glow.style.translate = `${x * 24}px ${y * 20}px`;
-    }
-  });
-
-  productStage.addEventListener("pointerleave", () => {
-    if (appWindow) appWindow.style.removeProperty("transform");
-    if (glow) glow.style.removeProperty("translate");
-  });
+function loadAnalytics() {
+  if (document.querySelector('script[data-lingo-analytics]')) return;
+  const analytics = document.createElement("script");
+  analytics.async = true;
+  analytics.src = "https://mc.yandex.ru/metrika/tag.js";
+  analytics.dataset.lingoAnalytics = "true";
+  document.head.appendChild(analytics);
+  window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
+  window.ym.l = Date.now();
+  window.ym("110608749", "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
 }

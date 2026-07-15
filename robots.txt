@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://lingo.app/sitemap.xml
+Sitemap: https://lingo-app.ru/sitemap.xml

@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lingo.app</loc>
-    <lastmod>2026-07-11</lastmod>
+    <loc>https://lingo-app.ru/</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://lingo.app/privacy</loc>
-    <lastmod>2026-07-11</lastmod>
+    <loc>https://lingo-app.ru/download</loc>
+    <lastmod>2026-07-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lingo-app.ru/privacy</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://lingo.app/terms</loc>
-    <lastmod>2026-07-11</lastmod>
+    <loc>https://lingo-app.ru/terms</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://lingo.app/contact</loc>
-    <lastmod>2026-07-11</lastmod>
+    <loc>https://lingo-app.ru/contact</loc>
+    <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

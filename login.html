@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#09080d" />
+    <meta name="description" content="Войдите или создайте аккаунт Lingo — переводчика, который сохраняет смысл." />
+    <link rel="canonical" href="https://lingo-app.ru/login" />
+    <title>Вход — Lingo</title>
+    <link rel="icon" href="icon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/login.js"></script>
+  </head>
+  <body class="login-body">
+    <div class="noise" aria-hidden="true"></div>
+    <main class="login-shell">
+      <a class="login-brand brand" href="/"><span class="brand-mark"><img src="/icon.ico" alt="" /></span><span>Lingo</span></a>
+      <section class="login-story" aria-labelledby="login-story-title">
+        <div class="story-aura" aria-hidden="true"><i></i><i></i><i></i><b>文</b><span>Hello · Привет · Bonjour · こんにちは</span></div>
+        <div class="story-content">
+          <p class="section-label"><span>LINGO ID</span> Одно пространство</p>
+          <h1 id="login-story-title">Ваш мир.<br /><em>На любом языке.</em></h1>
+          <p>Продолжайте переводить там, где остановились. История, настройки и любимые языки всегда рядом.</p>
+          <div class="story-quote"><span>“</span><blockquote>Я наконец перестал думать о переводе и снова начал думать о смысле.</blockquote><small>Алексей · Beta user</small></div>
+        </div>
+      </section>
+
+      <section class="login-panel" aria-label="Авторизация">
+        <div class="login-panel-inner">
+          <a class="back-link" href="/">← На главную</a>
+          <div class="auth-heading">
+            <span class="auth-kicker">Добро пожаловать</span>
+            <h2 data-auth-title>Снова в Lingo</h2>
+            <p data-auth-subtitle>Войдите, чтобы продолжить без границ.</p>
+          </div>
+          <div class="auth-tabs" role="tablist">
+            <button class="active" type="button" role="tab" aria-selected="true" data-auth-tab="login">Войти</button>
+            <button type="button" role="tab" aria-selected="false" data-auth-tab="register">Создать аккаунт</button>
+          </div>
+
+          <form class="concept-auth-form" novalidate data-auth-form>
+            <button class="google-button" type="button" data-google-login>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M21.6 12.23c0-.71-.06-1.4-.18-2.06H12v3.9h5.38a4.6 4.6 0 0 1-1.99 3.02v2.53h3.24c1.9-1.75 2.97-4.32 2.97-7.39Z"/><path fill="#34A853" d="M12 22c2.7 0 4.96-.9 6.62-2.38l-3.24-2.53c-.9.6-2.03.96-3.38.96-2.6 0-4.81-1.76-5.6-4.12H3.05v2.6A10 10 0 0 0 12 22Z"/><path fill="#FBBC05" d="M6.4 13.93A6.02 6.02 0 0 1 6.08 12c0-.67.12-1.31.32-1.93v-2.6H3.05A10 10 0 0 0 2 12c0 1.62.39 3.14 1.05 4.53l3.35-2.6Z"/><path fill="#EA4335" d="M12 5.95c1.47 0 2.79.51 3.83 1.5l2.86-2.88A9.62 9.62 0 0 0 12 2a10 10 0 0 0-8.95 5.47l3.35 2.6c.79-2.36 3-4.12 5.6-4.12Z"/></svg>
+              Продолжить с Google
+            </button>
+            <div class="auth-divider"><span>или через email</span></div>
+            <label class="floating-field"><input type="email" name="email" autocomplete="email" inputmode="email" placeholder=" " required data-auth-email /><span>Email</span><i>@</i></label>
+            <label class="floating-field password-field"><input type="password" name="password" autocomplete="current-password" placeholder=" " minlength="6" required data-auth-password /><span>Пароль</span><button type="button" aria-label="Показать пароль" data-password-toggle>◉</button></label>
+            <label class="floating-field register-only" hidden><input type="password" name="confirm" autocomplete="new-password" placeholder=" " minlength="6" data-auth-confirm /><span>Повторите пароль</span><i>✓</i></label>
+            <div class="auth-options"><label><input type="checkbox" /><span></span>Запомнить меня</label><button type="button" data-show-forgot>Забыли пароль?</button></div>
+            <button class="pill pill-primary auth-primary" type="submit" data-auth-submit><span data-auth-submit-label>Войти в Lingo</span><b>↗</b></button>
+            <p class="auth-legal">Продолжая, вы принимаете <a href="terms.html">условия</a> и <a href="privacy.html">политику конфиденциальности</a>.</p>
+          </form>
+          <p class="concept-auth-success" data-auth-message hidden aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
