@@ -35,10 +35,6 @@ document.querySelectorAll(".reveal").forEach((element, index) => {
   revealObserver.observe(element);
 });
 
-document.querySelector("[data-scroll-demo]")?.addEventListener("click", () => {
-  document.querySelector("#how")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
-});
-
 document.querySelectorAll("[data-tone]").forEach((button) => {
   button.addEventListener("click", () => {
     const copies = {
