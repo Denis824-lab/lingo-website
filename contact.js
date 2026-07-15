@@ -6,12 +6,10 @@ if (contactForm) {
   const emailInput = contactForm.querySelector("#contact-email");
   const subjectInput = contactForm.querySelector("#contact-subject");
   const messageInput = contactForm.querySelector("#contact-message");
-  const websiteInput = contactForm.querySelector('input[name="website"]');
   const submitButton = contactForm.querySelector("[data-contact-submit]");
   const submitLabel = contactForm.querySelector("[data-contact-submit-label]");
   const formWrapper = document.querySelector("[data-contact-form-wrapper]");
   const successMessage = document.querySelector("[data-contact-success]");
-  const endpoint = document.querySelector('meta[name="lingo-contact-endpoint"]')?.content;
 
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let isSubmitting = false;
@@ -42,7 +40,7 @@ if (contactForm) {
     isSubmitting = value;
     if (submitButton) submitButton.disabled = value;
     contactForm.setAttribute("aria-busy", String(value));
-    if (submitLabel) submitLabel.textContent = value ? "Отправляем…" : "Отправить сообщение";
+    if (submitLabel) submitLabel.textContent = value ? "Готовим…" : "Подготовить письмо";
   };
 
   emailInput?.addEventListener("input", () => clearError("email"));
@@ -77,51 +75,20 @@ if (contactForm) {
 
     if (hasErrors) return;
 
-    if (!endpoint) {
-      showError("email", "Сервис связи пока недоступен. Попробуйте позже.");
-      return;
-    }
-
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 10_000);
     setSubmitting(true);
+    const subject = `[Lingo] ${subjectInput.value.trim()}`;
+    const body = `${messageInput.value.trim()}\n\nEmail для ответа: ${emailInput.value.trim()}`;
+    window.location.href = `mailto:kugubaev.dev@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: emailInput.value.trim(),
-        subject: subjectInput.value.trim(),
-        message: messageInput.value.trim(),
-        website: websiteInput?.value ?? "",
-      }),
-      signal: controller.signal,
-    })
-      .then(async (response) => {
-        const data = await response.json().catch(() => ({}));
-        if (!response.ok || !data.ok) {
-          throw new Error(data.error || "Не удалось отправить сообщение. Попробуйте ещё раз.");
-        }
-
-        formWrapper?.classList.add("is-leaving");
-        const transitionDelay = reduceMotion.matches ? 0 : 280;
-        window.setTimeout(() => {
-          if (formWrapper) formWrapper.hidden = true;
-          if (successMessage) {
-            successMessage.hidden = false;
-            successMessage.classList.add("is-visible");
-          }
-        }, transitionDelay);
-      })
-      .catch((error) => {
-        const message = error.name === "AbortError"
-          ? "Сервер отвечает слишком долго. Попробуйте ещё раз."
-          : error.message;
-        showError("email", message);
-      })
-      .finally(() => {
-        window.clearTimeout(timeout);
-        setSubmitting(false);
-      });
+    formWrapper?.classList.add("is-leaving");
+    const transitionDelay = reduceMotion.matches ? 0 : 280;
+    window.setTimeout(() => {
+      if (formWrapper) formWrapper.hidden = true;
+      if (successMessage) {
+        successMessage.hidden = false;
+        successMessage.classList.add("is-visible");
+      }
+      setSubmitting(false);
+    }, transitionDelay);
   });
 }

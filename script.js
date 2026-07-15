@@ -69,54 +69,6 @@ if (!reducedMotion) {
   });
 }
 
-const accessForm = document.querySelector("[data-access-form]");
-accessForm?.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const email = accessForm.querySelector('input[name="email"]');
-  const website = accessForm.querySelector('input[name="website"]');
-  const button = accessForm.querySelector("[data-submit-button]");
-  const label = accessForm.querySelector("[data-submit-label]");
-  const note = document.querySelector("[data-form-note]");
-  const endpoint = document.querySelector('meta[name="lingo-subscribe-endpoint"]')?.content;
-
-  if (!email?.validity.valid) {
-    if (note) note.textContent = "Введите корректный email, чтобы продолжить.";
-    email?.focus();
-    return;
-  }
-  if (!endpoint) {
-    if (note) note.textContent = "Сервис подписки временно недоступен.";
-    return;
-  }
-
-  const controller = new AbortController();
-  const timeout = window.setTimeout(() => controller.abort(), 10000);
-  button.disabled = true;
-  accessForm.setAttribute("aria-busy", "true");
-  if (label) label.textContent = "Сохраняем…";
-
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email.value, website: website?.value || "" }),
-      signal: controller.signal,
-    });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || !result.ok) throw new Error(result.error || "Не удалось отправить заявку.");
-    email.disabled = true;
-    if (label) label.textContent = "Вы в списке ✓";
-    if (note) note.textContent = "Готово. Приглашение придёт на указанную почту.";
-  } catch (error) {
-    button.disabled = false;
-    if (label) label.textContent = "Получить приглашение";
-    if (note) note.textContent = error.name === "AbortError" ? "Сервер отвечает слишком долго. Попробуйте снова." : error.message;
-  } finally {
-    window.clearTimeout(timeout);
-    accessForm.setAttribute("aria-busy", "false");
-  }
-});
-
 const cookieBar = document.querySelector("[data-cookie-consent]");
 const consent = localStorage.getItem("cookie-consent");
 if (cookieBar && consent === null) cookieBar.hidden = false;
