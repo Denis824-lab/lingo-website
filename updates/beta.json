@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0-beta.2",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.2/Lingo-Setup-0.1.0-beta.2.exe",
+  "sha256": "c48b60168d9a2ed29a2193624df6f714868d4819693f7fad35ff056194bcd571",
+  "notes": [
+    "Встроенное безопасное обновление приложения.",
+    "Проверка целостности установщика перед запуском.",
+    "Автоматический перезапуск Lingo после установки."
+  ]
+}
