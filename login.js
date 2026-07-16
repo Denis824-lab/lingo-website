@@ -5,6 +5,9 @@ import {
   signInWithRedirect,
   getRedirectResult,
   GoogleAuthProvider,
+  setPersistence,
+  browserLocalPersistence,
+  browserSessionPersistence,
   sendEmailVerification,
   sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
@@ -16,6 +19,7 @@ const form = document.querySelector("[data-auth-form]");
 const email = document.querySelector("[data-auth-email]");
 const password = document.querySelector("[data-auth-password]");
 const confirmPassword = document.querySelector("[data-auth-confirm]");
+const remember = document.querySelector("[data-auth-remember]");
 const message = document.querySelector("[data-auth-message]");
 const submit = document.querySelector("[data-auth-submit]");
 const submitLabel = document.querySelector("[data-auth-submit-label]");
@@ -76,13 +80,34 @@ function setMode(nextMode) {
   document.querySelector(".auth-divider").hidden = mode === "forgot";
   if (password) password.required = mode !== "forgot";
   if (confirmPassword) confirmPassword.required = mode === "register";
+  document.querySelectorAll("[data-password-toggle]").forEach((toggle) => {
+    const target = form?.elements.namedItem(toggle.dataset.passwordTarget);
+    if (!(target instanceof HTMLInputElement)) return;
+    target.type = "password";
+    toggle.dataset.visible = "false";
+    toggle.setAttribute("aria-pressed", "false");
+    const fieldName = toggle.dataset.passwordTarget === "confirm" ? "повтор пароля" : "пароль";
+    toggle.setAttribute("aria-label", `Показать ${fieldName}`);
+  });
+}
+
+async function applyAuthPersistence() {
+  await setPersistence(auth, remember?.checked ? browserLocalPersistence : browserSessionPersistence);
 }
 
 document.querySelectorAll("[data-auth-tab]").forEach((tab) => tab.addEventListener("click", () => setMode(tab.dataset.authTab)));
 document.querySelector("[data-show-forgot]")?.addEventListener("click", () => setMode("forgot"));
-document.querySelector("[data-password-toggle]")?.addEventListener("click", (event) => {
-  password.type = password.type === "password" ? "text" : "password";
-  event.currentTarget.setAttribute("aria-label", password.type === "password" ? "Показать пароль" : "Скрыть пароль");
+document.querySelectorAll("[data-password-toggle]").forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const target = form?.elements.namedItem(toggle.dataset.passwordTarget);
+    if (!(target instanceof HTMLInputElement)) return;
+    const visible = target.type === "password";
+    target.type = visible ? "text" : "password";
+    toggle.dataset.visible = String(visible);
+    toggle.setAttribute("aria-pressed", String(visible));
+    const fieldName = toggle.dataset.passwordTarget === "confirm" ? "повтор пароля" : "пароль";
+    toggle.setAttribute("aria-label", visible ? `Скрыть ${fieldName}` : `Показать ${fieldName}`);
+  });
 });
 
 form?.addEventListener("submit", async (event) => {
@@ -93,6 +118,7 @@ form?.addEventListener("submit", async (event) => {
   if (mode === "register" && password.value !== confirmPassword?.value) { showMessage("Пароли не совпадают."); confirmPassword?.focus(); return; }
   setLoading(true);
   try {
+    if (mode !== "forgot") await applyAuthPersistence();
     if (mode === "login") {
       const credential = await signInWithEmailAndPassword(auth, email.value.trim(), password.value);
       await credential.user.reload();
@@ -123,6 +149,7 @@ document.querySelector("[data-google-login]")?.addEventListener("click", async (
   button.disabled = true;
   showMessage("");
   try {
+    await applyAuthPersistence();
     const result = await signInWithPopup(auth, provider);
     if (result.user) window.location.assign("/");
   } catch (error) {

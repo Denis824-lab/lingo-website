@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/style.css?v=20260715.3" />
-    <script type="module" src="/login.js"></script>
+    <link rel="stylesheet" href="/style.css?v=20260716.2" />
+    <script type="module" src="/login.js?v=20260716.1"></script>
   </head>
   <body class="login-body">
     <div class="noise" aria-hidden="true"></div>
@@ -48,10 +48,10 @@
               Продолжить с Google
             </button>
             <div class="auth-divider"><span>или через email</span></div>
-            <label class="floating-field"><input type="email" name="email" autocomplete="email" inputmode="email" placeholder=" " required data-auth-email /><span>Email</span><i>@</i></label>
-            <label class="floating-field password-field"><input type="password" name="password" autocomplete="current-password" placeholder=" " minlength="6" required data-auth-password /><span>Пароль</span><button type="button" aria-label="Показать пароль" data-password-toggle>◉</button></label>
-            <label class="floating-field register-only" hidden><input type="password" name="confirm" autocomplete="new-password" placeholder=" " minlength="6" data-auth-confirm /><span>Повторите пароль</span><i>✓</i></label>
-            <div class="auth-options"><label><input type="checkbox" /><span></span>Запомнить меня</label><button type="button" data-show-forgot>Забыли пароль?</button></div>
+            <label class="floating-field"><input type="email" name="email" autocomplete="email" inputmode="email" placeholder=" " required data-auth-email /><span>Email</span><i class="field-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m5 8 7 5 7-5"/></svg></i></label>
+            <label class="floating-field password-field"><input type="password" name="password" autocomplete="current-password" placeholder=" " minlength="6" required data-auth-password /><span>Пароль</span><button class="password-toggle" type="button" aria-label="Показать пароль" aria-pressed="false" data-password-toggle data-password-target="password"><svg class="eye-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.75"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3 21 21"/><path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a15.8 15.8 0 0 1-2.3 3.1M6.2 6.3C3.8 8 2.5 12 2.5 12s3.5 6 9.5 6c1 0 1.9-.2 2.8-.5"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></label>
+            <label class="floating-field register-only" hidden><input type="password" name="confirm" autocomplete="new-password" placeholder=" " minlength="6" data-auth-confirm /><span>Повторите пароль</span><button class="password-toggle" type="button" aria-label="Показать повтор пароля" aria-pressed="false" data-password-toggle data-password-target="confirm"><svg class="eye-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.75"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3 21 21"/><path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a15.8 15.8 0 0 1-2.3 3.1M6.2 6.3C3.8 8 2.5 12 2.5 12s3.5 6 9.5 6c1 0 1.9-.2 2.8-.5"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></label>
+            <div class="auth-options"><label><input type="checkbox" data-auth-remember /><span></span>Запомнить меня</label><button type="button" data-show-forgot>Забыли пароль?</button></div>
             <button class="pill pill-primary auth-primary" type="submit" data-auth-submit><span data-auth-submit-label>Войти в Lingo</span><b>↗</b></button>
             <p class="auth-legal">Продолжая, вы принимаете <a href="terms.html">условия</a> и <a href="privacy.html">политику конфиденциальности</a>.</p>
           </form>
