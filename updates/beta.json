@@ -1,10 +1,10 @@
 {
-  "version": "0.1.0-beta.7",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.7/Lingo-Setup-0.1.0-beta.7.exe",
-  "sha256": "fc543426108383f4e76e9041cae6db402618ee8027405e780d9d94f7005630b7",
+  "version": "0.1.0-beta.8",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.8/Lingo-Setup-0.1.0-beta.8.exe",
+  "sha256": "d23ae095a6da2c77afb9fddcd03b989f64dddde7c39bad1b171f7daca0484775",
   "notes": [
-    "Исправлены регистрация и вход через Firebase в Windows-приложении.",
-    "Ошибки email, пароля, сети и лимитов теперь показываются точно и по контексту.",
-    "Сайт корректно сообщает, когда аккаунт создан, но письмо подтверждения временно не отправилось."
+    "Регистрация и вход автоматически переключаются на резервный Firebase-маршрут при сетевых сбоях.",
+    "Окно авторизации остаётся отзывчивым даже при timeout — состояние «Не отвечает» устранено.",
+    "Исправлена проверка подтверждённого email при недоступности Windows keyring."
   ]
 }
