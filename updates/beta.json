@@ -1,10 +1,10 @@
 {
-  "version": "0.1.0-beta.3",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.3/Lingo-Setup-0.1.0-beta.3.exe",
-  "sha256": "9e296f54f79ac8a87354bd8c0b5049d6abf99406dffe1f917b243d178c206e2a",
+  "version": "0.1.0-beta.4",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.4/Lingo-Setup-0.1.0-beta.4.exe",
+  "sha256": "e197125f0fc18629fde324676aff465a4036e40a62203daad0df56a4b76be52d",
   "notes": [
-    "Встроенное безопасное обновление приложения.",
-    "Проверка целостности установщика перед запуском.",
-    "Автоматический перезапуск Lingo после установки."
+    "Исправлено отображение текста формы входа в установленной версии.",
+    "Русская и английская локализации теперь включаются в сборку.",
+    "Повышена надёжность релизных build-скриптов."
   ]
 }
