@@ -33,7 +33,7 @@ const copy = {
   forgot: { title: "Вернём доступ", subtitle: "Отправим ссылку для сброса пароля на вашу почту.", action: "Отправить ссылку" },
 };
 
-function errorText(code) {
+function errorText(code, action = "login") {
   const errors = {
     "auth/invalid-credential": "Неверный email или пароль.",
     "auth/user-disabled": "Аккаунт отключён. Обратитесь в поддержку.",
@@ -45,8 +45,12 @@ function errorText(code) {
     "auth/popup-closed-by-user": "Окно авторизации было закрыто.",
     "auth/popup-blocked": "Браузер заблокировал окно авторизации.",
     "auth/operation-not-allowed": "Этот способ входа пока недоступен.",
+    "auth/internal-error": "Сервис авторизации временно недоступен. Попробуйте ещё раз позже.",
   };
-  return errors[code] || "Произошла ошибка. Попробуйте ещё раз.";
+  if (errors[code]) return errors[code];
+  if (action === "register") return "Не удалось создать аккаунт. Попробуйте ещё раз позже.";
+  if (action === "reset") return "Не удалось отправить ссылку. Попробуйте ещё раз позже.";
+  return "Не удалось войти. Попробуйте ещё раз позже.";
 }
 
 function showMessage(text, type = "error") {
@@ -130,15 +134,21 @@ form?.addEventListener("submit", async (event) => {
       window.location.assign("/");
     } else if (mode === "register") {
       const credential = await createUserWithEmailAndPassword(auth, email.value.trim(), password.value);
-      await sendEmailVerification(credential.user, ACTION_CODE_SETTINGS);
-      showMessage("Аккаунт создан. Проверьте почту и подтвердите email.", "success");
+      try {
+        await sendEmailVerification(credential.user, ACTION_CODE_SETTINGS);
+        showMessage("Аккаунт создан. Проверьте почту и подтвердите email.", "success");
+      } catch (verificationError) {
+        console.warn("Email verification delivery failed", verificationError?.code || "unknown");
+        showMessage("Аккаунт создан, но письмо пока не отправилось. Перейдите во «Войти»: после входа мы повторим отправку.", "info");
+      }
       form.reset();
     } else {
       await sendPasswordResetEmail(auth, email.value.trim(), ACTION_CODE_SETTINGS);
       showMessage("Ссылка для сброса пароля отправлена. Проверьте почту.", "success");
     }
   } catch (error) {
-    showMessage(errorText(error.code));
+    const action = mode === "register" ? "register" : mode === "forgot" ? "reset" : "login";
+    showMessage(errorText(error.code, action));
   } finally {
     setLoading(false);
   }
