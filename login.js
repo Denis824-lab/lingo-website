@@ -136,7 +136,7 @@ form?.addEventListener("submit", async (event) => {
       const credential = await createUserWithEmailAndPassword(auth, email.value.trim(), password.value);
       try {
         await sendEmailVerification(credential.user, ACTION_CODE_SETTINGS);
-        showMessage("Аккаунт создан. Проверьте почту и подтвердите email.", "success");
+        showMessage("Аккаунт создан. Проверьте почту и папку «Спам», затем подтвердите email.", "success");
       } catch (verificationError) {
         console.warn("Email verification delivery failed", verificationError?.code || "unknown");
         showMessage("Аккаунт создан, но письмо пока не отправилось. Перейдите во «Войти»: после входа мы повторим отправку.", "info");
