@@ -1,10 +1,10 @@
 {
-  "version": "0.1.0-beta.8",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.8/Lingo-Setup-0.1.0-beta.8.exe",
-  "sha256": "d23ae095a6da2c77afb9fddcd03b989f64dddde7c39bad1b171f7daca0484775",
+  "version": "0.1.0-beta.10",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.10/Lingo-Setup-0.1.0-beta.10.exe",
+  "sha256": "6d12f637aa3f50dcbff67f0c7fcc54d35998da62f3db95e4bf42e8c0f0d7b625",
   "notes": [
-    "Регистрация и вход автоматически переключаются на резервный Firebase-маршрут при сетевых сбоях.",
-    "Окно авторизации остаётся отзывчивым даже при timeout — состояние «Не отвечает» устранено.",
-    "Исправлена проверка подтверждённого email при недоступности Windows keyring."
+    "Проверка обновлений запускается до входа в аккаунт.",
+    "Обновление скачивается с проверкой SHA-256 и устанавливается после закрытия Lingo.",
+    "В настройках отображается текущая версия приложения."
   ]
 }
