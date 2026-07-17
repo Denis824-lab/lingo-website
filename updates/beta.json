@@ -1,10 +1,9 @@
 {
-  "version": "0.1.0-beta.17",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.17/Lingo-Setup-0.1.0-beta.17.exe",
-  "sha256": "50640d631e8034ffc03af30d646c81b58e3defedf88e25a0d2324f5e43af9321",
+  "version": "0.1.0-beta.19",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.19/Lingo-Setup-0.1.0-beta.19.exe",
+  "sha256": "3503a025ca07a57c7a85642bb28e5508223ff8fdbccea8c2cb9359ca0a27b652",
   "notes": [
-    "Исправлен вход через Google в desktop-приложении: Firebase получает доверенный Auth domain после безопасного callback.",
-    "Улучшена обработка ошибок конфигурации OAuth.",
+    "Обновление релиза и синхронизация исправлений входа через Google OAuth в десктопном приложении.",
     "Каждая загрузка installer по-прежнему проверяется по SHA-256."
   ]
 }
