@@ -1,10 +1,11 @@
 {
-  "version": "0.1.0-beta.11",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.11/Lingo-Setup-0.1.0-beta.11.exe",
-  "sha256": "35e715ee6528a65a0645a81b7fcc0044e113947b595eb11817a2d0fd1c291c7e",
+  "version": "0.1.0-beta.12",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.12/Lingo-Setup-0.1.0-beta.12.exe",
+  "sha256": "25cc6c30385af51839e00dc54dc4f2f456ef3029b9cbd82f300ef7150cd23371",
   "notes": [
-    "Вырезка экрана запускается из меню Lingo в панели задач Windows.",
-    "Выделение работает на одном или нескольких мониторах и сразу открывает визуальный перевод.",
-    "Alt+Z и кнопка «С экрана» используют тот же быстрый сценарий вырезки."
+    "Google sign-in now completes through the desktop loopback callback.",
+    "The updater resumes interrupted installer downloads from GitHub CDN.",
+    "Microphone and speech action icons are restored.",
+    "Account status in Settings now matches the sidebar Account page."
   ]
 }
