@@ -1,10 +1,10 @@
 {
-  "version": "0.1.0-beta.16",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.16/Lingo-Setup-0.1.0-beta.16.exe",
-  "sha256": "ff08fe3ed010a4f6cdae08cd9f332323dd0cce0643b6b68256c73ff9a269b249",
+  "version": "0.1.0-beta.17",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.17/Lingo-Setup-0.1.0-beta.17.exe",
+  "sha256": "50640d631e8034ffc03af30d646c81b58e3defedf88e25a0d2324f5e43af9321",
   "notes": [
-    "Updater now falls back to Windows system curl if Python TLS cannot reach GitHub CDN.",
-    "Every installer download remains verified by SHA-256.",
-    "Desktop Google OAuth now uses a PKCE-enabled Desktop client without a client secret."
+    "Исправлен вход через Google в desktop-приложении: Firebase получает доверенный Auth domain после безопасного callback.",
+    "Улучшена обработка ошибок конфигурации OAuth.",
+    "Каждая загрузка installer по-прежнему проверяется по SHA-256."
   ]
 }
