@@ -1,9 +1,6 @@
 {
-  "version": "0.1.0-beta.13",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.13/Lingo-Setup-0.1.0-beta.13.exe",
-  "sha256": "9c74e232f54e2dc8c7e352f3818cdbae9567c54592b0a1190d6f9363a19aaa19",
-  "notes": [
-    "Critical fix: updater starts the verified installer directly without cmd.exe parsing.",
-    "Lingo starts automatically after a silent update."
-  ]
+  "version": "0.1.0-beta.14",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.14/Lingo-Setup-0.1.0-beta.14.exe",
+  "sha256": "d71f8ee66cd2733ba72018bd870cbe314e8813ac950628b7955c2b2c02237b68",
+  "notes": ["Restored and precisely centred microphone and speech action icons."]
 }
