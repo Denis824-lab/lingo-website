@@ -1,11 +1,9 @@
 {
-  "version": "0.1.0-beta.12",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.12/Lingo-Setup-0.1.0-beta.12.exe",
-  "sha256": "25cc6c30385af51839e00dc54dc4f2f456ef3029b9cbd82f300ef7150cd23371",
+  "version": "0.1.0-beta.13",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.13/Lingo-Setup-0.1.0-beta.13.exe",
+  "sha256": "9c74e232f54e2dc8c7e352f3818cdbae9567c54592b0a1190d6f9363a19aaa19",
   "notes": [
-    "Google sign-in now completes through the desktop loopback callback.",
-    "The updater resumes interrupted installer downloads from GitHub CDN.",
-    "Microphone and speech action icons are restored.",
-    "Account status in Settings now matches the sidebar Account page."
+    "Critical fix: updater starts the verified installer directly without cmd.exe parsing.",
+    "Lingo starts automatically after a silent update."
   ]
 }
