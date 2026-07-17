@@ -1,7 +1,7 @@
 {
   "version": "0.1.0-beta.11",
   "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.11/Lingo-Setup-0.1.0-beta.11.exe",
-  "sha256": "b7bee48de2c041762b1a104824cfc7b940691aa9b51d0fc5d9f2317e292cb9cc",
+  "sha256": "35e715ee6528a65a0645a81b7fcc0044e113947b595eb11817a2d0fd1c291c7e",
   "notes": [
     "Вырезка экрана запускается из меню Lingo в панели задач Windows.",
     "Выделение работает на одном или нескольких мониторах и сразу открывает визуальный перевод.",
