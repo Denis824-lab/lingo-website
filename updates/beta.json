@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-beta.19",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.19/Lingo-Setup-0.1.0-beta.19.exe",
-  "sha256": "3503a025ca07a57c7a85642bb28e5508223ff8fdbccea8c2cb9359ca0a27b652",
+  "version": "0.1.0-beta.20",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.20/Lingo-Setup-0.1.0-beta.20.exe",
+  "sha256": "8697718c2e6812436adec820aca739062eb1b876dd6a0670aee195fdb42e5e5e",
   "notes": [
-    "Обновление релиза и синхронизация исправлений входа через Google OAuth в десктопном приложении.",
+    "Beta 0.1.0-beta.20",
     "Каждая загрузка installer по-прежнему проверяется по SHA-256."
   ]
 }
