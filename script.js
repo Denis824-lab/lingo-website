@@ -80,11 +80,11 @@ document.querySelector("[data-cookie-decline]")?.addEventListener("click", () =>
 });
 
 function loadAnalytics() {
-  if (document.querySelector('script[data-lingo-analytics]')) return;
+  if (document.querySelector('script[data-linmo-analytics]')) return;
   const analytics = document.createElement("script");
   analytics.async = true;
   analytics.src = "https://mc.yandex.ru/metrika/tag.js";
-  analytics.dataset.lingoAnalytics = "true";
+  analytics.dataset.linmoAnalytics = "true";
   document.head.appendChild(analytics);
   window.ym = window.ym || function () { (window.ym.a = window.ym.a || []).push(arguments); };
   window.ym.l = Date.now();

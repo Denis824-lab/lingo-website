@@ -1,5 +1,5 @@
 /**
- * Firebase client configuration for lingo-app.ru (project: lingo-production-da31c).
+ * Firebase client configuration for linmoapp.ru (project: lingo-production-da31c).
  *
  * All values below are PUBLIC client-side keys — they are designed to be
  * shipped in frontend code. They are NOT service-account credentials.

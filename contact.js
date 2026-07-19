@@ -104,10 +104,10 @@ if (contactForm) {
           email,
           subject,
           message,
-          _subject: `[Lingo] ${subject}`,
+          _subject: `[Linmo] ${subject}`,
           _replyto: email,
           _template: "table",
-          source: "lingo-app.ru/contact",
+          source: "linmoapp.ru/contact",
         }),
       });
 

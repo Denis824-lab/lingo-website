@@ -13,7 +13,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 import { auth } from "./firebase-config.js";
 
-const ACTION_CODE_SETTINGS = { url: "https://lingo-app.ru/auth/action", handleCodeInApp: false };
+const ACTION_CODE_SETTINGS = { url: "https://linmoapp.ru/auth/action", handleCodeInApp: false };
 const provider = new GoogleAuthProvider();
 const form = document.querySelector("[data-auth-form]");
 const email = document.querySelector("[data-auth-email]");
@@ -28,8 +28,8 @@ const subtitle = document.querySelector("[data-auth-subtitle]");
 let mode = "login";
 
 const copy = {
-  login: { title: "Снова в Lingo", subtitle: "Войдите, чтобы продолжить без границ.", action: "Войти в Lingo" },
-  register: { title: "Начните с Lingo", subtitle: "Создайте аккаунт — это займёт меньше минуты.", action: "Создать аккаунт" },
+  login: { title: "Снова в Linmo", subtitle: "Войдите, чтобы продолжить без границ.", action: "Войти в Linmo" },
+  register: { title: "Начните с Linmo", subtitle: "Создайте аккаунт — это займёт меньше минуты.", action: "Создать аккаунт" },
   forgot: { title: "Вернём доступ", subtitle: "Отправим ссылку для сброса пароля на вашу почту.", action: "Отправить ссылку" },
 };
 

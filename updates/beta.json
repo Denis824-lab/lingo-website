@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-beta.20",
-  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.20/Lingo-Setup-0.1.0-beta.20.exe",
-  "sha256": "8697718c2e6812436adec820aca739062eb1b876dd6a0670aee195fdb42e5e5e",
+  "version": "0.1.0-beta.21",
+  "url": "https://github.com/Denis824-lab/Lingo-Releases/releases/download/v0.1.0-beta.21/Linmo-Setup-0.1.0-beta.21.exe",
+  "sha256": "f0eebabc68b17d11ae02bfea6b55bad9f7bef138fe851b1c37a6219e1f19b9e6",
   "notes": [
-    "Beta 0.1.0-beta.20",
+    "Beta 0.1.0-beta.21 — Linmo: полный ребрендинг и новый домен linmoapp.ru.",
     "Каждая загрузка installer по-прежнему проверяется по SHA-256."
   ]
 }

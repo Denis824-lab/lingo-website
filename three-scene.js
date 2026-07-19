@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-const canvas = document.querySelector("#lingo-orb");
+const canvas = document.querySelector("#linmo-orb");
 const host = canvas?.parentElement;
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
