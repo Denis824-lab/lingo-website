@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-beta.22",
-  "url": "https://github.com/Denis824-lab/Linmo-Releases/releases/download/v0.1.0-beta.22/Linmo-Setup-0.1.0-beta.22.exe",
-  "sha256": "cb9df489ecab6063071a854a7d957a24d15577f567659961cbba682533a7aaad",
+  "version": "0.1.0-beta.23",
+  "url": "https://github.com/Denis824-lab/Linmo-Releases/releases/download/v0.1.0-beta.23/Linmo-Setup-0.1.0-beta.23.exe",
+  "sha256": "1f09266532f8bdffb1438358357cda6a879f80fb7db956df7df5808f15e0ff25",
   "notes": [
-    "Beta 0.1.0-beta.22 — полный переход приложения на Linmo: пакет, EXE, установщик и обновления.",
-    "Загрузки и автообновления используют Linmo-Releases и проверяются по SHA-256."
+    "Beta 0.1.0-beta.23 — переходное обновление для автоматического перехода с Lingo на Linmo.",
+    "Установщик, загрузка и автообновление проверяются по SHA-256."
   ]
 }
