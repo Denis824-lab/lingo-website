@@ -1,9 +1,9 @@
 {
-  "version": "0.1.0-beta.24",
-  "url": "https://github.com/Denis824-lab/Linmo-Releases/releases/download/v0.1.0-beta.24/Linmo-Setup-0.1.0-beta.24.exe",
-  "sha256": "fc49258a363fd40ec6fce07d5bda33dfa36e0afc7f321f75d94a651051302395",
+  "version": "0.1.0-beta.25",
+  "url": "https://github.com/Denis824-lab/Linmo-Releases/releases/download/v0.1.0-beta.25/Linmo-Setup-0.1.0-beta.25.exe",
+  "sha256": "9637046fc12b2fe0892cc8dea42dfe62fae8646d519178ae2f6514b1cf1dd8cd",
   "notes": [
-    "Beta 0.1.0-beta.24 — автообновления получают manifest напрямую через проверенный GitHub HTTPS.",
-    "Установщик, загрузка и автообновление проверяются по SHA-256."
+    "Beta 0.1.0-beta.25 надежнее проверяет обновления через GitHub и сохраняет резервный канал.",
+    "Профиль Lingo переносится в Linmo без удаления исходных пользовательских данных."
   ]
 }
